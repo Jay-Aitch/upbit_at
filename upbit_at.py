@@ -108,7 +108,7 @@ while True:
                 upbit.sell_market_order("KRW-"+ticker, ticker_b)  
                 signal_buy = 0
                 phase_buy = 0
-                msg_sell = ticker+" 전량매도\n매도가: "+ str(int(current_price)) +"\n매도수량: "+str(int(ticker_b))+"\n예상수익률: "+str(int((current_price/ticker_avg_buy-1)*100)) +"%"
+                msg_sell = ticker+" 전량매도\n매도가: "+ str(int(current_price)) +"\n매도수량: "+str(int(ticker_b))+"\n예상수익률: "+str(round((current_price/ticker_avg_buy-1)*100,2)) +"%"
                 #bot.sendMessage(mc, msg_sell)
                 get_balance(ticker)              
                 msg_balance = "\nKRW잔고: "+str(int(krw))+"원"
@@ -125,7 +125,7 @@ while True:
                 signal_buy = 0
                 phase_buy = 0
                 trailing_start=0
-                msg_sell = ticker+" 전량매도(Trailing)\n매도가: "+ str(int(current_price)) +"\n매도수량: "+str(int(ticker_b))+"\n예상수익률: "+str(int((current_price/ticker_avg_buy-1)*100)) +"%"
+                msg_sell = ticker+" 전량매도(Trailing)\n매도가: "+ str(int(current_price)) +"\n매도수량: "+str(int(ticker_b))+"\n예상수익률: "+str(round((current_price/ticker_avg_buy-1)*100,2)) +"%"
                 #bot.sendMessage(mc, msg_sell)
                 get_balance(ticker)              
                 msg_balance = "\nKRW잔고: "+str(int(krw))+"원"
@@ -136,7 +136,7 @@ while True:
         #if (target_price < current_price) and (macd[-1] > macd_signal[-1]) and (krw > 5000):
         #if (slow_k[-2] <= 80) and (macd[-2] < macd_signal[-2]) and (macd[-1] >= macd_signal[-1]) and (slow_k[-1] >= slow_d[-1]) and (krw > 5000):
         #if (slow_k[-2] <= 20) and (slow_k[-2] < slow_d[-2]) and (slow_k[-1] >= slow_d[-1]) and (macd_osc[-3] < macd_osc[-2]) and (macd_osc[-2] < macd_osc[-1]) and (macd_osc_30m[-2] < macd_osc_30m[-1]) and (krw > 5000):
-        if (slow_k[-2] <= 80) and (slow_k[-2] < slow_d[-2]) and (slow_k[-1] >= slow_d[-1]) and (slow_k_30m[-1] >= slow_d_30m[-1]) and (krw > 5000):
+        if (slow_k[-2] <= 50) and (slow_k[-2] < slow_d[-2]) and (slow_k[-1] >= slow_d[-1]) and (slow_k_30m[-2] < slow_k_30m[-1]) and (macd_osc[-2] < macd_osc[-1]) and (krw > 5000):
         
             if (phase_buy == 2) and (ticker_avg_buy*0.995 > current_price) :
                 upbit.buy_market_order("KRW-"+ticker, (krw*0.9995))
